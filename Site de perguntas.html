@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Feedback da Barbearia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group span {
+            display: block;
+            font-size: 14px;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Feedback da Barbearia</h1>
+        <form id="feedback-form">
+            <div class="form-group">
+                <label for="nome">Nome do Cliente:</label>
+                <input type="text" id="nome" name="nome" required>
+                <span id="nome-error" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="visitas">Quantas vezes vem no mês na barbearia:</label>
+                <input type="number" id="visitas" name="visitas" min="0" required>
+                <span id="visitas-error" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="corte">Qual corte ele mais gosta:</label>
+                <input type="text" id="corte" name="corte" required>
+                <span id="corte-error" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="barbeiro">Preferência de barbeiro:</label>
+                <input type="text" id="barbeiro" name="barbeiro">
+            </div>
+
+            <div class="form-group">
+                <label for="avaliacao">Avaliação da barbearia (0 a 10):</label>
+                <input type="number" id="avaliacao" name="avaliacao" min="0" max="10" required>
+                <span id="avaliacao-error" class="error-message"></span>
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('feedback-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const visitas = document.getElementById('visitas').value;
+            const corte = document.getElementById('corte').value;
+            const barbeiro = document.getElementById('barbeiro').value;
+            const avaliacao = document.getElementById('avaliacao').value;
+
+            let isValid = true;
+
+            // Clear previous error messages
+            document.querySelectorAll('.error-message').forEach(msg => msg.textContent = '');
+
+            // Validations
+            if (!nome.trim()) {
+                document.getElementById('nome-error').textContent = 'Nome é obrigatório.';
+                isValid = false;
+            }
+
+            if (visitas < 0) {
+                document.getElementById('visitas-error').textContent = 'Número de visitas deve ser 0 ou maior.';
+                isValid = false;
+            }
+
+            if (!corte.trim()) {
+                document.getElementById('corte-error').textContent = 'Informe o corte preferido.';
+                isValid = false;
+            }
+
+            if (avaliacao < 0 || avaliacao > 10) {
+                document.getElementById('avaliacao-error').textContent = 'Avaliação deve ser entre 0 e 10.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Formulário enviado com sucesso!');
+                // Aqui você pode adicionar o código para enviar os dados para um servidor
+                // Exemplo: 
+                // fetch('/api/feedback', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ nome, visitas, corte, barbeiro, avaliacao })
+                // });
+            }
+        });
+    </script>
+</body>
+</html>
