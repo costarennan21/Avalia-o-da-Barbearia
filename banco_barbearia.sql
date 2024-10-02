@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01/10/2024 às 01:18
+-- Tempo de geração: 02/10/2024 às 04:25
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -18,346 +18,170 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `banco_barbearia`
+-- Banco de dados: `bancobar`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `nomes_5`
+-- Estrutura para tabela `avaliacao`
 --
 
-CREATE TABLE `nomes_5` (
-  `COL 1` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `avaliacao` (
+  `id` int(11) NOT NULL,
+  `cliente_nome` varchar(100) NOT NULL,
+  `nota` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `nomes_5`
+-- Despejando dados para a tabela `avaliacao`
 --
 
-INSERT INTO `nomes_5` (`COL 1`) VALUES
-('Pedro Silva'),
-('Tiago Dias'),
-('Davi Lopes'),
-('Sérgio Freitas'),
-('Mateus Silva'),
-('Bernardo Andrade'),
-('Alexandre Gomes'),
-('João Nascimento'),
-('Bernardo Cavalcanti'),
-('Marcelo Melo'),
-('Mateus Almeida'),
-('Eduardo Aragão'),
-('Gustavo Vieira'),
-('Sérgio Andrade'),
-('Carlos Correia'),
-('André Macedo'),
-('Julio Carvalho'),
-('Pedro Pereira'),
-('Lucas Batista'),
-('Vinícius Vasconcelos'),
-('João Paulo Carvalho'),
-('Mateus Sá'),
-('João Paulo Teixeira'),
-('João Paulo Batista'),
-('Sérgio Pereira'),
-('Leandro Oliveira'),
-('Henrique Pinto'),
-('Hugo Monteiro'),
-('Neto Pinto'),
-('Felipe Paiva'),
-('Rafael Almeida'),
-('Davi Batista'),
-('Augusto Nogueira'),
-('João Paulo Sousa'),
-('Thiago Macedo'),
-('Renato Ferreira'),
-('Fernando Costa'),
-('Fábio Nogueira'),
-('Lucas Andrade'),
-('Bruno Gomes'),
-('Eduardo Vieira'),
-('Gustavo Monteiro'),
-('Paulo Queiroz'),
-('Roberto Dias'),
-('André Andrade'),
-('Thiago Farias'),
-('Vinícius Morais'),
-('Marcos Gomes'),
-('Eduardo Pinto'),
-('Augusto Santana');
+INSERT INTO `avaliacao` (`id`, `cliente_nome`, `nota`) VALUES
+(1, 'Rennan Pereira Costa', 5);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `nomes_barbeiro_`
+-- Estrutura para tabela `barbeiro`
 --
 
-CREATE TABLE `nomes_barbeiro_` (
-  `COL 1` varchar(21) DEFAULT NULL,
-  `COL 2` varchar(18) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `barbeiro` (
+  `id` int(11) NOT NULL,
+  `cliente_nome` varchar(100) NOT NULL,
+  `nome_barbeiro` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `nomes_barbeiro_`
+-- Despejando dados para a tabela `barbeiro`
 --
 
-INSERT INTO `nomes_barbeiro_` (`COL 1`, `COL 2`) VALUES
-('Nomes com Barbeiro', NULL),
-('Eduardo Aragão ', ' Barbeiro: Rennan'),
-('Hugo Monteiro ', ' Barbeiro: Antônio'),
-('Pedro Pereira ', ' Barbeiro: Vicente'),
-('Sérgio Freitas ', ' Barbeiro: Arthur'),
-('Julio Carvalho ', ' Barbeiro: Vicente'),
-('Gustavo Monteiro ', ' Barbeiro: Arthur'),
-('Eduardo Pinto ', ' Barbeiro: Arthur'),
-('Bernardo Cavalcanti ', ' Barbeiro: Rennan'),
-('Lucas Andrade ', ' Barbeiro: Arthur'),
-('Carlos Correia ', ' Barbeiro: Arthur'),
-('Paulo Queiroz ', ' Barbeiro: Arthur'),
-('Marcelo Melo ', ' Barbeiro: Vicente'),
-('Augusto Santana ', ' Barbeiro: Rennan'),
-('Vinícius Vasconcelos ', ' Barbeiro: Vicente'),
-('Tiago Dias ', ' Barbeiro: Rennan'),
-('Sérgio Andrade ', ' Barbeiro: Vicente'),
-('Mateus Sá ', ' Barbeiro: Arthur'),
-('Eduardo Vieira ', ' Barbeiro: Arthur'),
-('Neto Pinto ', ' Barbeiro: Rennan'),
-('André Macedo ', ' Barbeiro: Rennan'),
-('Pedro Silva ', ' Barbeiro: Arthur'),
-('Bernardo Andrade ', ' Barbeiro: Arthur'),
-('Alexandre Gomes ', ' Barbeiro: Antônio'),
-('Vinícius Morais ', ' Barbeiro: Vicente'),
-('Davi Lopes ', ' Barbeiro: Rennan'),
-('Thiago Macedo ', ' Barbeiro: Vicente'),
-('Fernando Costa ', ' Barbeiro: Vicente'),
-('Davi Batista ', ' Barbeiro: Rennan'),
-('Bruno Gomes ', ' Barbeiro: Arthur'),
-('Lucas Batista ', ' Barbeiro: Rennan'),
-('Felipe Paiva ', ' Barbeiro: Vicente'),
-('Marcos Gomes ', ' Barbeiro: Vicente'),
-('Augusto Nogueira ', ' Barbeiro: Vicente'),
-('João Paulo Batista ', ' Barbeiro: Antônio'),
-('Thiago Farias ', ' Barbeiro: Antônio'),
-('Rafael Almeida ', ' Barbeiro: Vicente'),
-('Fábio Nogueira ', ' Barbeiro: Rennan'),
-('Roberto Dias ', ' Barbeiro: Rennan'),
-('João Paulo Sousa ', ' Barbeiro: Vicente'),
-('Sérgio Pereira ', ' Barbeiro: Rennan'),
-('Gustavo Vieira ', ' Barbeiro: Vicente'),
-('João Paulo Teixeira ', ' Barbeiro: Antônio'),
-('João Nascimento ', ' Barbeiro: Arthur'),
-('Leandro Oliveira ', ' Barbeiro: Rennan'),
-('Henrique Pinto ', ' Barbeiro: Antônio'),
-('João Paulo Carvalho ', ' Barbeiro: Arthur'),
-('Renato Ferreira ', ' Barbeiro: Arthur'),
-('Mateus Almeida ', ' Barbeiro: Antônio'),
-('Mateus Silva ', ' Barbeiro: Antônio'),
-('André Andrade ', ' Barbeiro: Antônio');
+INSERT INTO `barbeiro` (`id`, `cliente_nome`, `nome_barbeiro`) VALUES
+(1, 'Rennan Pereira Costa', 'Arthur');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `nomes_corte_`
+-- Estrutura para tabela `corte`
 --
 
-CREATE TABLE `nomes_corte_` (
-  `COL 1` varchar(23) DEFAULT NULL,
-  `COL 2` varchar(9) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `corte` (
+  `id` int(11) NOT NULL,
+  `cliente_nome` varchar(100) NOT NULL,
+  `tipo_corte` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `nomes_corte_`
+-- Despejando dados para a tabela `corte`
 --
 
-INSERT INTO `nomes_corte_` (`COL 1`, `COL 2`) VALUES
-('Nomes com Tipo de Corte', NULL),
-('Marcelo Melo ', ' Social'),
-('João Paulo Batista ', ' Raspado'),
-('Thiago Macedo ', ' Tesoura'),
-('Bernardo Cavalcanti ', ' Disfarce'),
-('Carlos Correia ', ' Tesoura'),
-('Augusto Santana ', ' Disfarce'),
-('Sérgio Freitas ', ' Social'),
-('Eduardo Vieira ', ' Disfarce'),
-('Henrique Pinto ', ' Raspado'),
-('Davi Lopes ', ' Raspado'),
-('Mateus Silva ', ' Social'),
-('Gustavo Vieira ', ' Raspado'),
-('João Paulo Teixeira ', ' Tesoura'),
-('Felipe Paiva ', ' Tesoura'),
-('Julio Carvalho ', ' Disfarce'),
-('Alexandre Gomes ', ' Raspado'),
-('André Andrade ', ' Tesoura'),
-('Lucas Andrade ', ' Tesoura'),
-('André Macedo ', ' Disfarce'),
-('Mateus Almeida ', ' Social'),
-('Renato Ferreira ', ' Tesoura'),
-('Tiago Dias ', ' Tesoura'),
-('Fernando Costa ', ' Disfarce'),
-('Bernardo Andrade ', ' Tesoura'),
-('Bruno Gomes ', ' Social'),
-('Hugo Monteiro ', ' Tesoura'),
-('João Paulo Carvalho ', ' Social'),
-('Pedro Silva ', ' Tesoura'),
-('Paulo Queiroz ', ' Raspado'),
-('Pedro Pereira ', ' Disfarce'),
-('Sérgio Pereira ', ' Tesoura'),
-('Augusto Nogueira ', ' Social'),
-('Eduardo Pinto ', ' Raspado'),
-('Leandro Oliveira ', ' Raspado'),
-('Davi Batista ', ' Tesoura'),
-('Lucas Batista ', ' Tesoura'),
-('Fábio Nogueira ', ' Raspado'),
-('Roberto Dias ', ' Social'),
-('Vinícius Morais ', ' Raspado'),
-('João Nascimento ', ' Raspado'),
-('Neto Pinto ', ' Disfarce'),
-('João Paulo Sousa ', ' Raspado'),
-('Mateus Sá ', ' Disfarce'),
-('Gustavo Monteiro ', ' Tesoura'),
-('Thiago Farias ', ' Social'),
-('Rafael Almeida ', ' Disfarce'),
-('Eduardo Aragão ', ' Disfarce'),
-('Marcos Gomes ', ' Disfarce'),
-('Vinícius Vasconcelos ', ' Disfarce'),
-('Sérgio Andrade ', ' Tesoura');
+INSERT INTO `corte` (`id`, `cliente_nome`, `tipo_corte`) VALUES
+(1, 'Rennan Pereira Costa', 'raspado');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `nomes_notas_`
+-- Estrutura para tabela `nome`
 --
 
-CREATE TABLE `nomes_notas_` (
-  `COL 1` varchar(21) DEFAULT NULL,
-  `COL 2` varchar(8) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `nome` (
+  `id` int(11) NOT NULL,
+  `cliente_nome` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `nomes_notas_`
+-- Despejando dados para a tabela `nome`
 --
 
-INSERT INTO `nomes_notas_` (`COL 1`, `COL 2`) VALUES
-('Nomes com Notas', NULL),
-('Paulo Queiroz ', ' Nota: 2'),
-('Sérgio Andrade ', ' Nota: 5'),
-('Hugo Monteiro ', ' Nota: 1'),
-('João Nascimento ', ' Nota: 2'),
-('Julio Carvalho ', ' Nota: 4'),
-('Thiago Macedo ', ' Nota: 3'),
-('Fábio Nogueira ', ' Nota: 5'),
-('Vinícius Vasconcelos ', ' Nota: 4'),
-('Bernardo Andrade ', ' Nota: 2'),
-('Renato Ferreira ', ' Nota: 2'),
-('Felipe Paiva ', ' Nota: 1'),
-('Eduardo Vieira ', ' Nota: 5'),
-('João Paulo Batista ', ' Nota: 3'),
-('Mateus Silva ', ' Nota: 3'),
-('Mateus Sá ', ' Nota: 2'),
-('Davi Lopes ', ' Nota: 5'),
-('Bruno Gomes ', ' Nota: 5'),
-('Bernardo Cavalcanti ', ' Nota: 1'),
-('Thiago Farias ', ' Nota: 3'),
-('Mateus Almeida ', ' Nota: 4'),
-('Augusto Santana ', ' Nota: 3'),
-('Fernando Costa ', ' Nota: 1'),
-('Vinícius Morais ', ' Nota: 3'),
-('João Paulo Sousa ', ' Nota: 2'),
-('João Paulo Carvalho ', ' Nota: 5'),
-('Pedro Silva ', ' Nota: 3'),
-('Lucas Andrade ', ' Nota: 3'),
-('Leandro Oliveira ', ' Nota: 1'),
-('Davi Batista ', ' Nota: 1'),
-('André Andrade ', ' Nota: 4'),
-('Carlos Correia ', ' Nota: 1'),
-('Rafael Almeida ', ' Nota: 2'),
-('Marcelo Melo ', ' Nota: 4'),
-('Tiago Dias ', ' Nota: 2'),
-('Eduardo Aragão ', ' Nota: 3'),
-('Sérgio Pereira ', ' Nota: 3'),
-('Augusto Nogueira ', ' Nota: 3'),
-('Marcos Gomes ', ' Nota: 1'),
-('André Macedo ', ' Nota: 1'),
-('Pedro Pereira ', ' Nota: 2'),
-('Gustavo Monteiro ', ' Nota: 5'),
-('Henrique Pinto ', ' Nota: 1'),
-('João Paulo Teixeira ', ' Nota: 2'),
-('Roberto Dias ', ' Nota: 2'),
-('Eduardo Pinto ', ' Nota: 3'),
-('Neto Pinto ', ' Nota: 4'),
-('Alexandre Gomes ', ' Nota: 3'),
-('Sérgio Freitas ', ' Nota: 4'),
-('Gustavo Vieira ', ' Nota: 5'),
-('Lucas Batista ', ' Nota: 3');
+INSERT INTO `nome` (`id`, `cliente_nome`) VALUES
+(1, 'Rennan Pereira Costa');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `nomes_visitas_`
+-- Estrutura para tabela `visita`
 --
 
-CREATE TABLE `nomes_visitas_` (
-  `COL 1` varchar(21) DEFAULT NULL,
-  `COL 2` varchar(19) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `visita` (
+  `id` int(11) NOT NULL,
+  `cliente_nome` varchar(100) NOT NULL,
+  `quantidade_visitas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `nomes_visitas_`
+-- Despejando dados para a tabela `visita`
 --
 
-INSERT INTO `nomes_visitas_` (`COL 1`, `COL 2`) VALUES
-('Nomes com Visitas', NULL),
-('Sérgio Pereira ', ' Visita: 15 em dias'),
-('André Andrade ', ' Visita: 60 em dias'),
-('Vinícius Morais ', ' Visita: 60 em dias'),
-('Davi Batista ', ' Visita: 60 em dias'),
-('Sérgio Freitas ', ' Visita: 10 em dias'),
-('Gustavo Monteiro ', ' Visita: 30 em dias'),
-('Augusto Nogueira ', ' Visita: 30 em dias'),
-('André Macedo ', ' Visita: 15 em dias'),
-('João Paulo Sousa ', ' Visita: 15 em dias'),
-('João Paulo Batista ', ' Visita: 60 em dias'),
-('Paulo Queiroz ', ' Visita: 10 em dias'),
-('Eduardo Aragão ', ' Visita: 10 em dias'),
-('Fábio Nogueira ', ' Visita: 10 em dias'),
-('Lucas Andrade ', ' Visita: 15 em dias'),
-('Thiago Macedo ', ' Visita: 15 em dias'),
-('Renato Ferreira ', ' Visita: 10 em dias'),
-('Neto Pinto ', ' Visita: 60 em dias'),
-('Bernardo Cavalcanti ', ' Visita: 10 em dias'),
-('Carlos Correia ', ' Visita: 60 em dias'),
-('Felipe Paiva ', ' Visita: 10 em dias'),
-('Sérgio Andrade ', ' Visita: 30 em dias'),
-('Henrique Pinto ', ' Visita: 60 em dias'),
-('Fernando Costa ', ' Visita: 60 em dias'),
-('Hugo Monteiro ', ' Visita: 15 em dias'),
-('Bruno Gomes ', ' Visita: 60 em dias'),
-('Davi Lopes ', ' Visita: 15 em dias'),
-('Leandro Oliveira ', ' Visita: 10 em dias'),
-('Eduardo Vieira ', ' Visita: 15 em dias'),
-('Mateus Silva ', ' Visita: 15 em dias'),
-('João Paulo Carvalho ', ' Visita: 30 em dias'),
-('João Nascimento ', ' Visita: 60 em dias'),
-('Mateus Almeida ', ' Visita: 60 em dias'),
-('Bernardo Andrade ', ' Visita: 30 em dias'),
-('Vinícius Vasconcelos ', ' Visita: 30 em dias'),
-('Pedro Silva ', ' Visita: 30 em dias'),
-('Gustavo Vieira ', ' Visita: 30 em dias'),
-('Lucas Batista ', ' Visita: 60 em dias'),
-('Marcelo Melo ', ' Visita: 10 em dias'),
-('Marcos Gomes ', ' Visita: 15 em dias'),
-('Thiago Farias ', ' Visita: 60 em dias'),
-('Pedro Pereira ', ' Visita: 10 em dias'),
-('Rafael Almeida ', ' Visita: 15 em dias'),
-('Roberto Dias ', ' Visita: 10 em dias'),
-('Eduardo Pinto ', ' Visita: 15 em dias'),
-('Mateus Sá ', ' Visita: 60 em dias'),
-('Julio Carvalho ', ' Visita: 15 em dias'),
-('João Paulo Teixeira ', ' Visita: 15 em dias'),
-('Augusto Santana ', ' Visita: 10 em dias'),
-('Tiago Dias ', ' Visita: 30 em dias'),
-('Alexandre Gomes ', ' Visita: 30 em dias');
+INSERT INTO `visita` (`id`, `cliente_nome`, `quantidade_visitas`) VALUES
+(1, 'Rennan Pereira Costa', 24);
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `avaliacao`
+--
+ALTER TABLE `avaliacao`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `barbeiro`
+--
+ALTER TABLE `barbeiro`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `corte`
+--
+ALTER TABLE `corte`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `nome`
+--
+ALTER TABLE `nome`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `visita`
+--
+ALTER TABLE `visita`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `avaliacao`
+--
+ALTER TABLE `avaliacao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `barbeiro`
+--
+ALTER TABLE `barbeiro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `corte`
+--
+ALTER TABLE `corte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `nome`
+--
+ALTER TABLE `nome`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `visita`
+--
+ALTER TABLE `visita`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
