@@ -1,152 +1,141 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Feedback da Barbearia</title>
+    <!-- Adicionando Bootstrap para melhorar o estilo -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f9f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            background-color: #f8f9fa;
         }
+
         .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
+            margin-top: 50px;
+            max-width: 500px;
         }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
+
+        .card {
+            border-radius: 15px;
         }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="number"], select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
+
+        .card-header {
             background-color: #007bff;
             color: #fff;
-            border: none;
-            padding: 12px;
-            border-radius: 5px;
-            cursor: pointer;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .btn-primary {
             width: 100%;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group span {
-            display: block;
-            font-size: 14px;
-            color: #d9534f;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Feedback da Barbearia</h1>
-        <form id="feedback-form">
-            <div class="form-group">
-                <label for="nome">Nome do Cliente:</label>
-                <input type="text" id="nome" name="nome" required>
-                <span id="nome-error" class="error-message"></span>
+        <div class="card">
+            <div class="card-header">
+                <h3>Feedback da Barbearia</h3>
             </div>
+            <div class="card-body">
+                <?php
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    // Configurações de conexão com o banco de dados
+                    $servername = "localhost";
+                    $username = "root";  // Troque se necessário
+                    $password = "";      // Troque se necessário
+                    $dbname = "bancobar";
 
-            <div class="form-group">
-                <label for="visitas">Quantas vezes vem no mês na barbearia:</label>
-                <input type="number" id="visitas" name="visitas" min="0" required>
-                <span id="visitas-error" class="error-message"></span>
+                    // Criando a conexão
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    // Verificar a conexão
+                    if ($conn->connect_error) {
+                        die("<div class='alert alert-danger'>Conexão falhou: " . $conn->connect_error . "</div>");
+                    }
+
+                    // Pegando os dados do formulário
+                    $nome = $_POST['nome'];
+                    $visitas = $_POST['visitas'];
+                    $corte = $_POST['corte'];
+                    $barbeiro = $_POST['barbeiro'];
+                    $avaliacao = $_POST['avaliacao'];
+
+                    // Inserindo dados na tabela visitas_clientes
+                    $stmt_visitas = $conn->prepare("INSERT INTO visitas_clientes (nome_cliente, numero_visitas) VALUES (?, ?)");
+                    $stmt_visitas->bind_param("si", $nome, $visitas);
+                    if ($stmt_visitas->execute()) {
+                        echo "<div class='alert alert-success'>Visitas inseridas com sucesso!</div>";
+                    } else {
+                        echo "<div class='alert alert-danger'>Erro ao inserir visitas: " . $stmt_visitas->error . "</div>";
+                    }
+                    $stmt_visitas->close();
+
+                    // Inserindo dados na tabela corte_clientes
+                    $stmt_corte = $conn->prepare("INSERT INTO corte_clientes (nome_cliente, corte_preferido) VALUES (?, ?)");
+                    $stmt_corte->bind_param("ss", $nome, $corte);
+                    if ($stmt_corte->execute()) {
+                        echo "<div class='alert alert-success'>Corte preferido inserido com sucesso!</div>";
+                    } else {
+                        echo "<div class='alert alert-danger'>Erro ao inserir corte preferido: " . $stmt_corte->error . "</div>";
+                    }
+                    $stmt_corte->close();
+
+                    // Inserindo dados na tabela barbeiro_clientes
+                    $stmt_barbeiro = $conn->prepare("INSERT INTO barbeiro_clientes (nome_cliente, barbeiro_preferido) VALUES (?, ?)");
+                    $stmt_barbeiro->bind_param("ss", $nome, $barbeiro);
+                    if ($stmt_barbeiro->execute()) {
+                        echo "<div class='alert alert-success'>Preferência de barbeiro inserida com sucesso!</div>";
+                    } else {
+                        echo "<div class='alert alert-danger'>Erro ao inserir preferência de barbeiro: " . $stmt_barbeiro->error . "</div>";
+                    }
+                    $stmt_barbeiro->close();
+
+                    // Inserindo dados na tabela avaliacao_clientes
+                    $stmt_avaliacao = $conn->prepare("INSERT INTO avaliacao_clientes (nome_cliente, avaliacao) VALUES (?, ?)");
+                    $stmt_avaliacao->bind_param("si", $nome, $avaliacao);
+                    if ($stmt_avaliacao->execute()) {
+                        echo "<div class='alert alert-success'>Avaliação inserida com sucesso!</div>";
+                    } else {
+                        echo "<div class='alert alert-danger'>Erro ao inserir avaliação: " . $stmt_avaliacao->error . "</div>";
+                    }
+                    $stmt_avaliacao->close();
+
+                    $conn->close();
+                }
+                ?>
+                <form action="" method="POST">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome do Cliente:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="visitas" class="form-label">Quantas vezes vem no mês na barbearia:</label>
+                        <input type="number" class="form-control" id="visitas" name="visitas" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="corte" class="form-label">Qual corte ele mais gosta:</label>
+                        <input type="text" class="form-control" id="corte" name="corte" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="barbeiro" class="form-label">Preferência de barbeiro:</label>
+                        <input type="text" class="form-control" id="barbeiro" name="barbeiro">
+                    </div>
+                    <div class="mb-3">
+                        <label for="avaliacao" class="form-label">Avaliação da barbearia (0 a 10):</label>
+                        <input type="number" class="form-control" id="avaliacao" name="avaliacao" min="0" max="10" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
             </div>
-
-            <div class="form-group">
-                <label for="corte">Qual corte ele mais gosta:</label>
-                <input type="text" id="corte" name="corte" required>
-                <span id="corte-error" class="error-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="barbeiro">Preferência de barbeiro:</label>
-                <input type="text" id="barbeiro" name="barbeiro">
-            </div>
-
-            <div class="form-group">
-                <label for="avaliacao">Avaliação da barbearia (0 a 10):</label>
-                <input type="number" id="avaliacao" name="avaliacao" min="0" max="10" required>
-                <span id="avaliacao-error" class="error-message"></span>
-            </div>
-
-            <button type="submit">Enviar</button>
-        </form>
+        </div>
     </div>
 
-    <script>
-        document.getElementById('feedback-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const nome = document.getElementById('nome').value;
-            const visitas = document.getElementById('visitas').value;
-            const corte = document.getElementById('corte').value;
-            const barbeiro = document.getElementById('barbeiro').value;
-            const avaliacao = document.getElementById('avaliacao').value;
-
-            let isValid = true;
-
-            // Clear previous error messages
-            document.querySelectorAll('.error-message').forEach(msg => msg.textContent = '');
-
-            // Validations
-            if (!nome.trim()) {
-                document.getElementById('nome-error').textContent = 'Nome é obrigatório.';
-                isValid = false;
-            }
-
-            if (visitas < 0) {
-                document.getElementById('visitas-error').textContent = 'Número de visitas deve ser 0 ou maior.';
-                isValid = false;
-            }
-
-            if (!corte.trim()) {
-                document.getElementById('corte-error').textContent = 'Informe o corte preferido.';
-                isValid = false;
-            }
-
-            if (avaliacao < 0 || avaliacao > 10) {
-                document.getElementById('avaliacao-error').textContent = 'Avaliação deve ser entre 0 e 10.';
-                isValid = false;
-            }
-
-            if (isValid) {
-                alert('Formulário enviado com sucesso!');
-                // Aqui você pode adicionar o código para enviar os dados para um servidor
-                // Exemplo: 
-                // fetch('/api/feedback', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({ nome, visitas, corte, barbeiro, avaliacao })
-                // });
-            }
-        });
-    </script>
+    <!-- Adicionando JS do Bootstrap para funcionalidade adicional -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
